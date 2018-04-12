@@ -11,6 +11,19 @@ var userSchema = new Schema({
 
 var User = mongoose.model('User', userSchema);
 
+userSchema.pre('save', function(next) {
+
+  var existingUser = await User.findOne({
+    email: this.email
+  });
+
+  debugger;
+
+  if (!existingUser)
+    next();
+
+});
+
 module.exports = {
   User
 }
